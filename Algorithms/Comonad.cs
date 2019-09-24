@@ -19,5 +19,8 @@ namespace Algorithms
         /// <returns>An enumerable with the results of every function application</returns>
         public static IEnumerable<B> Extend<A, B>(this IEnumerable<A> list, Func<IEnumerable<A>, B> func) =>
             list.Any() ? new List<B>() { func(list) }.Concat(list.Skip(1).Extend(func)) : new List<B>();
+
+        public static KeyValuePair<E, B> Extend<A, B, E>(this KeyValuePair<E, A> pair, Func<KeyValuePair<E, A>, B> func) =>
+            KeyValuePair.Create(pair.Key, func(pair));
     }
 }
